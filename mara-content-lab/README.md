@@ -53,6 +53,17 @@ If the `origin` remote already exists, update it with `git remote set-url origin
 5. Save and deploy.
 6. Open the generated `*.pages.dev` URL and check the site. New pushes to the production branch trigger deployments automatically; check the Pages project’s deployments view to confirm each build.
 
+### Cloudflare Workers static assets (if the dashboard opens Workers)
+
+The site can also be deployed as static assets through the newer Workers workflow without adding an API or server logic. The included `wrangler.jsonc` publishes the generated `out/` folder.
+
+1. In the Worker project’s build settings, set **Root directory** to `mara-content-lab` (or `.` if the app folder itself is the Git repository).
+2. Set **Build command** to `npm run build`.
+3. Set **Deploy command** to `npx wrangler deploy`.
+4. Leave environment variables and API tokens blank, then redeploy.
+
+The root directory must contain `package.json` and `wrangler.jsonc`. If Cloudflare reports that it cannot find `package.json`, its root directory is still set incorrectly.
+
 ### Optional: custom domain
 
 In the Pages project, open **Custom domains** and add your domain. Follow the DNS records shown in Cloudflare’s UI (typically a CNAME, or the records Cloudflare specifies for your domain and DNS setup). Cloudflare provisions and renews SSL automatically after DNS is active. This can be done after the `pages.dev` site is working.
