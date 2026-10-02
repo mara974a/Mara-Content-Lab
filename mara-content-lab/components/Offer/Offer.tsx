@@ -89,6 +89,9 @@ export default function Offer() {
             ))}
           </ul>
         </div>
+        <a href="#request" className={styles.offerCta}>
+          Request this sprint
+        </a>
 
         <div className={styles.offerGrid}>
           <section className={styles.offerColumn} aria-labelledby="included-heading">

@@ -13,7 +13,7 @@ export default function Hero() {
             Turn one strong conversation into a clearer case for hiring you.
           </h1>
           <p className={styles.heroBody}>
-            Mara Content Lab turns an approved podcast, webinar, or interview into a focused LinkedIn authority sprint—carefully grounded in what you actually said.
+            I turn an approved podcast, webinar, or interview into a focused LinkedIn authority sprint—carefully grounded in what you actually said.
           </p>
           <div className={styles.heroActions}>
             <a href="#request" className={styles.heroCta}>

@@ -165,7 +165,7 @@ export default function RequestForm() {
             Request a project
           </h2>
           <p className={styles.formSupportingText}>
-            If you have one strong conversation worth turning into clear LinkedIn content, share the source and a little context.
+            Fill out the form below with one strong conversation and a little context. I&apos;ll review your request and reply within 2 business days. If it&apos;s a fit, I&apos;ll confirm the scope and share a payment link; otherwise, I&apos;ll let you know.
           </p>
         </div>
 
