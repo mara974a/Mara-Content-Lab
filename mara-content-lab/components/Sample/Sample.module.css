@@ -1,0 +1,93 @@
+.sample {
+  padding-block: var(--space-24);
+  border-bottom: var(--border-hair);
+}
+
+.sampleInner {
+  max-width: var(--wide-width);
+  margin-inline: auto;
+}
+
+.sampleHeading {
+  font-size: clamp(var(--text-3xl), 3.5vw, var(--text-4xl));
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+.sampleBody {
+  font-size: var(--text-lg);
+  color: var(--clr-ink-soft);
+  line-height: 1.7;
+  margin-bottom: var(--space-10);
+  max-width: 56ch;
+}
+
+.samplePlaceholder {
+  border-top: var(--border-rule);
+  border-bottom: var(--border-rule);
+  padding-block: var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.samplePlaceholderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sampleTag {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--clr-accent);
+}
+
+.sampleSteps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sampleStep {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sampleStepDot {
+  width: 5px;
+  height: 1px;
+  background-color: var(--clr-accent);
+  flex-shrink: 0;
+}
+
+.sampleStepText {
+  font-size: var(--text-sm);
+  color: var(--clr-ink-muted);
+  max-width: none;
+}
+
+.samplePlaceholderRight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sampleNotice {
+  font-size: var(--text-sm);
+  color: var(--clr-ink-muted);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .samplePlaceholder {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

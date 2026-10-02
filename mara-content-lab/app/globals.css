@@ -1,0 +1,241 @@
+/* ============================================================
+   MARA CONTENT LAB — GLOBAL STYLES
+   Editorial, restrained, human. No gradients, no gimmicks.
+   ============================================================ */
+
+/* ── Custom Properties ─────────────────────────────────────── */
+:root {
+  /* Palette */
+  --clr-paper:        #f7f5f0;
+  --clr-paper-warm:   #f0ede6;
+  --clr-paper-rule:   #e4e0d8;
+  --clr-ink:          #1f1e1b;
+  --clr-ink-soft:     #3d3b36;
+  --clr-ink-muted:    #6b6760;
+  --clr-ink-faint:    #74716b;
+  --clr-accent:       #2b4470;
+  --clr-accent-soft:  #3a5a8c;
+  --clr-accent-pale:  #e8edf5;
+  --clr-warm-gray:    #d6d2ca;
+  --clr-highlight:    #e8e3d5;
+
+  /* Typography */
+  --font-serif:       Georgia, 'Times New Roman', serif;
+  --font-sans:        'Helvetica Neue', Arial, sans-serif;
+
+  /* Scale */
+  --text-xs:          0.75rem;
+  --text-sm:          0.875rem;
+  --text-base:        1rem;
+  --text-md:          1.0625rem;
+  --text-lg:          1.125rem;
+  --text-xl:          1.25rem;
+  --text-2xl:         1.5rem;
+  --text-3xl:         1.875rem;
+  --text-4xl:         2.25rem;
+  --text-5xl:         2.75rem;
+  --text-6xl:         3.5rem;
+
+  /* Spacing */
+  --space-1:          0.25rem;
+  --space-2:          0.5rem;
+  --space-3:          0.75rem;
+  --space-4:          1rem;
+  --space-5:          1.25rem;
+  --space-6:          1.5rem;
+  --space-8:          2rem;
+  --space-10:         2.5rem;
+  --space-12:         3rem;
+  --space-16:         4rem;
+  --space-20:         5rem;
+  --space-24:         6rem;
+  --space-32:         8rem;
+
+  /* Layout */
+  --max-width:        1100px;
+  --content-width:    680px;
+  --wide-width:       860px;
+
+  /* Borders */
+  --border-hair:      1px solid var(--clr-paper-rule);
+  --border-rule:      1px solid var(--clr-warm-gray);
+
+  /* Transitions */
+  --ease-out:         cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast:    150ms;
+  --duration-base:    250ms;
+  --duration-slow:    400ms;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  transform: translateY(-200%);
+  background: var(--clr-paper);
+  color: var(--clr-accent);
+  border: 1px solid var(--clr-accent);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--clr-warm-gray);
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
+}
+
+a:hover {
+  color: var(--clr-accent);
+  text-decoration-color: var(--clr-accent);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--clr-ink);
+}
+
+p {
+  color: var(--clr-ink-soft);
+  max-width: 65ch;
+}
+
+/* ── Focus States ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Layout Utilities ───────────────────────────────────────── */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-8);
+}
+
+.container--narrow {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--space-8);
+}
+
+.container--wide {
+  max-width: var(--wide-width);
+  margin-inline: auto;
+  padding-inline: var(--space-8);
+}
+
+/* ── Typography Utilities ───────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.section-index {
+  margin-bottom: var(--space-4);
+  color: var(--clr-accent);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-rule {
+  border: none;
+  border-top: var(--border-hair);
+  margin-block: var(--space-16);
+}
+
+/* ── Section Spacing ────────────────────────────────────────── */
+.section {
+  padding-block: var(--space-24);
+}
+
+.section--lg {
+  padding-block: var(--space-32);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--clr-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--clr-warm-gray);
+  border-radius: 3px;
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+::selection {
+  background-color: var(--clr-accent-pale);
+  color: var(--clr-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

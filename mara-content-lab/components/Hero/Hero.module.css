@@ -1,0 +1,212 @@
+.hero {
+  padding-block: var(--space-24) var(--space-20);
+  border-bottom: var(--border-hair);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-20);
+  align-items: center;
+}
+
+.heroEyebrow {
+  margin-bottom: var(--space-5);
+}
+
+.heroHeadline {
+  font-size: clamp(var(--text-4xl), 4.5vw, var(--text-6xl));
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--clr-ink);
+  margin-bottom: var(--space-6);
+  max-width: 14ch;
+}
+
+.heroBody {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--clr-ink-soft);
+  max-width: 48ch;
+  margin-bottom: var(--space-10);
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.heroCta {
+  display: inline-block;
+  font-size: var(--text-base);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: #fff;
+  background-color: var(--clr-accent);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--clr-accent);
+  border-radius: 0;
+  transition: background-color var(--duration-fast) ease;
+}
+
+.heroCta:hover {
+  background-color: var(--clr-accent-soft);
+  border-color: var(--clr-accent-soft);
+  color: #fff;
+  text-decoration: none;
+}
+
+.heroSecondary {
+  font-size: var(--text-sm);
+  color: var(--clr-ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--clr-warm-gray);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  padding: 0;
+  transition: color var(--duration-fast) ease;
+}
+
+.heroSecondary:hover {
+  color: var(--clr-accent);
+}
+
+/* ── Editorial Visual ───────────────────────────────────────── */
+.editorialVisual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+
+.docSheet {
+  border-top: 1px solid var(--clr-warm-gray);
+  border-bottom: 1px solid var(--clr-warm-gray);
+  padding: var(--space-6) var(--space-4);
+  width: 100%;
+  max-width: 430px;
+  position: relative;
+  font-family: var(--font-sans);
+}
+
+.docLabel {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: var(--space-8);
+}
+
+.sourceSheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-inline: var(--space-2);
+}
+
+.sourceLine {
+  display: block;
+  width: 92%;
+  height: 7px;
+  background: var(--clr-warm-gray);
+}
+
+.sourceLineShort {
+  width: 68%;
+}
+
+.sourceLineMedium {
+  width: 78%;
+}
+
+.sourceLineHighlight {
+  width: 100%;
+  height: 10px;
+  background: #b9c3d1;
+}
+
+.marginNote {
+  margin-top: var(--space-3);
+  color: var(--clr-accent);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  font-style: italic;
+  text-align: right;
+}
+
+.transition {
+  height: 1px;
+  margin: var(--space-6) 0;
+  background: var(--clr-paper-rule);
+  position: relative;
+}
+
+.transition span {
+  position: absolute;
+  right: 12%;
+  top: -2px;
+  width: 28%;
+  height: 5px;
+  background: var(--clr-accent);
+}
+
+.docResult {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--clr-accent);
+}
+
+.docResultLabel {
+  font-size: 0.6875rem;
+  color: var(--clr-accent);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.resultText {
+  color: var(--clr-ink-soft);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  max-width: 42ch;
+}
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+  .editorialVisual {
+    justify-content: flex-start;
+  }
+  .docSheet {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero {
+    padding-block: var(--space-16) var(--space-16);
+  }
+  .heroHeadline {
+    font-size: var(--text-4xl);
+  }
+  .heroBody {
+    font-size: var(--text-base);
+  }
+  .heroActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .docSheet {
+    padding: var(--space-5) var(--space-3);
+  }
+}
