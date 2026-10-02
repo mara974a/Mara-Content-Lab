@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import styles from "./RequestForm.module.css";
 
 const FORM_ACTION = `https://formsubmit.co/${CONTACT_EMAIL}`;
+const DRAFT_STORAGE_KEY = "mara-content-lab-request-draft-v1";
 const SUCCESS_MESSAGE =
   "Thanks, your request is received. I'll review your source and get back to you within 2 business days. If it's a fit, I'll share scope confirmation and a payment link.";
 
@@ -28,6 +29,7 @@ interface FormErrors {
   companyWebsite?: string;
   role?: string;
   sourceLink?: string;
+  linkedinUrl?: string;
   targetAudience?: string;
   contentGoal?: string;
   acknowledged?: string;
@@ -53,9 +55,11 @@ function validateEmail(email: string): boolean {
 
 function validateUrl(url: string): boolean {
   if (!url) return true; // optional
+  if (/\s/.test(url)) return false;
   try {
-    new URL(url.startsWith("http") ? url : `https://${url}`);
-    return true;
+    const candidate = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+    const parsed = new URL(candidate);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
   } catch {
     return false;
   }
@@ -64,36 +68,98 @@ function validateUrl(url: string): boolean {
 export default function RequestForm() {
   const [formData, setFormData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [step, setStep] = useState(1);
+  const [draftReady, setDraftReady] = useState(false);
+  const [draftSaveFailed, setDraftSaveFailed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const validate = (): FormErrors => {
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        const savedDraft = localStorage.getItem(DRAFT_STORAGE_KEY);
+        if (savedDraft) {
+          const parsed = JSON.parse(savedDraft) as {
+            formData?: Partial<FormData>;
+            step?: number;
+          };
+          if (parsed.formData) {
+            setFormData({ ...initialData, ...parsed.formData });
+          }
+          if (typeof parsed.step === "number" && parsed.step >= 1 && parsed.step <= 3) {
+            setStep(parsed.step);
+          }
+        }
+      } catch {
+        setDraftSaveFailed(true);
+      } finally {
+        setDraftReady(true);
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const hasDraft = Object.values(formData).some((value) =>
+    typeof value === "string" ? value.trim() !== "" : value
+  );
+
+  useEffect(() => {
+    if (!draftReady) return;
+
+    try {
+      if (submitted || !hasDraft) {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+      } else {
+        localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify({ formData, step }));
+      }
+    } catch {
+      window.setTimeout(() => setDraftSaveFailed(true), 0);
+    }
+  }, [draftReady, formData, hasDraft, step, submitted]);
+
+  useEffect(() => {
+    if (draftReady && step > 1) {
+      document.getElementById(`form-step-${step}-heading`)?.focus();
+    }
+  }, [draftReady, step]);
+
+  const validateStep = (stepNumber: number): FormErrors => {
     const e: FormErrors = {};
-    if (!formData.fullName.trim()) e.fullName = "Full name is required.";
-    if (!formData.workEmail.trim()) {
-      e.workEmail = "Work email is required.";
-    } else if (!validateEmail(formData.workEmail)) {
-      e.workEmail = "Please enter a valid email address.";
+
+    if (stepNumber === 1) {
+      if (!formData.fullName.trim()) e.fullName = "Full name is required.";
+      if (!formData.workEmail.trim()) {
+        e.workEmail = "Work email is required.";
+      } else if (!validateEmail(formData.workEmail)) {
+        e.workEmail = "Please enter a valid email address.";
+      }
+      if (!formData.companyWebsite.trim()) {
+        e.companyWebsite = "Company or professional website is required.";
+      } else if (!validateUrl(formData.companyWebsite)) {
+        e.companyWebsite = "Please enter a valid URL.";
+      }
+      if (!formData.role.trim()) e.role = "Role is required.";
     }
-    if (!formData.companyWebsite.trim()) {
-      e.companyWebsite = "Company or professional website is required.";
-    } else if (!validateUrl(formData.companyWebsite)) {
-      e.companyWebsite = "Please enter a valid URL.";
+
+    if (stepNumber === 2) {
+      if (!formData.sourceLink.trim()) {
+        e.sourceLink = "Source link is required.";
+      } else if (!validateUrl(formData.sourceLink)) {
+        e.sourceLink = "Please enter a valid URL.";
+      }
+      if (formData.linkedinUrl.trim() && !validateUrl(formData.linkedinUrl)) {
+        e.linkedinUrl = "Please enter a valid URL.";
+      }
+      if (!formData.targetAudience.trim()) {
+        e.targetAudience = "Please describe who this content should reach.";
+      }
+      if (!formData.contentGoal.trim()) {
+        e.contentGoal = "Please describe what the content should clarify.";
+      }
     }
-    if (!formData.role.trim()) e.role = "Role is required.";
-    if (!formData.sourceLink.trim()) {
-      e.sourceLink = "Source link is required.";
-    } else if (!validateUrl(formData.sourceLink)) {
-      e.sourceLink = "Please enter a valid URL.";
-    }
-    if (!formData.targetAudience.trim()) {
-      e.targetAudience = "Please describe who this content should reach.";
-    }
-    if (!formData.contentGoal.trim()) {
-      e.contentGoal = "Please describe what the content should clarify.";
-    }
-    if (!formData.acknowledged) {
+
+    if (stepNumber === 3 && !formData.acknowledged) {
       e.acknowledged = "Please confirm you understand how requests are reviewed.";
     }
     return e;
@@ -104,6 +170,7 @@ export default function RequestForm() {
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
+    setDraftSaveFailed(false);
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -116,17 +183,31 @@ export default function RequestForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const validationErrors = validate();
+    const validationErrors = step === 3
+      ? { ...validateStep(1), ...validateStep(2), ...validateStep(3) }
+      : validateStep(step);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       const firstErrorKey = Object.keys(validationErrors)[0];
-      const el = document.getElementById(`field-${firstErrorKey}`);
-      el?.focus();
+      const firstErrorStep = ["fullName", "workEmail", "companyWebsite", "role"].includes(firstErrorKey)
+        ? 1
+        : ["sourceLink", "linkedinUrl", "targetAudience", "contentGoal"].includes(firstErrorKey)
+          ? 2
+          : 3;
+      setStep(firstErrorStep);
+      requestAnimationFrame(() => {
+        document.getElementById(`field-${firstErrorKey}`)?.focus();
+      });
+      return;
+    }
+
+    setSubmitError(null);
+    if (step < 3) {
+      setStep(step + 1);
       return;
     }
 
     setSubmitting(true);
-    setSubmitError(null);
 
     try {
       const body = new FormData(form);
@@ -146,9 +227,7 @@ export default function RequestForm() {
 
       setSubmitted(true);
     } catch {
-      setSubmitError(
-        `The request could not be sent. Please try again, or email ${CONTACT_EMAIL} directly.`
-      );
+      setSubmitError("send-failed");
     } finally {
       setSubmitting(false);
     }
@@ -186,6 +265,24 @@ export default function RequestForm() {
           <input type="hidden" name="_subject" value="New Mara Content Lab request" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
+          <div className={styles.progressHeader}>
+            <p className={styles.stepCount} aria-live="polite">Step {step} of 3</p>
+            <div
+              className={styles.progressTrack}
+              role="progressbar"
+              aria-label={`Request form progress: step ${step} of 3`}
+              aria-valuemin={1}
+              aria-valuemax={3}
+              aria-valuenow={step}
+            >
+              <span style={{ width: `${(step / 3) * 100}%` }} />
+            </div>
+          </div>
+
+          <div className={styles.stepFields} hidden={step !== 1} aria-labelledby="form-step-1-heading">
+            <h3 id="form-step-1-heading" className={styles.stepHeading} tabIndex={-1}>
+              Contact details
+            </h3>
           {/* Row 1: Name + Email */}
           <div className={styles.formRow}>
             <div className={styles.fieldGroup}>
@@ -284,7 +381,12 @@ export default function RequestForm() {
               )}
             </div>
           </div>
+          </div>
 
+          <div className={styles.stepFields} hidden={step !== 2} aria-labelledby="form-step-2-heading">
+            <h3 id="form-step-2-heading" className={styles.stepHeading} tabIndex={-1}>
+              Source and direction
+            </h3>
           {/* Source link */}
           <div className={styles.fieldGroup}>
             <label htmlFor="field-sourceLink" className={styles.label}>
@@ -372,7 +474,14 @@ export default function RequestForm() {
               className={styles.input}
               value={formData.linkedinUrl}
               onChange={handleChange}
+              aria-invalid={Boolean(errors.linkedinUrl)}
+              aria-describedby={errors.linkedinUrl ? "err-linkedinUrl" : undefined}
             />
+            {errors.linkedinUrl && (
+              <span id="err-linkedinUrl" className={styles.fieldError} role="alert">
+                {errors.linkedinUrl}
+              </span>
+            )}
           </div>
 
           {/* Voice references */}
@@ -408,6 +517,50 @@ export default function RequestForm() {
               style={{ minHeight: "80px" }}
             />
           </div>
+          </div>
+
+          <div className={styles.stepFields} hidden={step !== 3} aria-labelledby="form-step-3-heading">
+            <h3 id="form-step-3-heading" className={styles.stepHeading} tabIndex={-1}>
+              Review your request
+            </h3>
+            <dl className={styles.reviewList}>
+              <div className={styles.reviewItem}>
+                <dt>Name</dt><dd>{formData.fullName || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Email</dt><dd>{formData.workEmail || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Website</dt><dd>{formData.companyWebsite || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Role</dt><dd>{formData.role || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Source</dt><dd>{formData.sourceLink || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Audience</dt><dd>{formData.targetAudience || "Not provided"}</dd>
+              </div>
+              <div className={styles.reviewItem}>
+                <dt>Content goal</dt><dd>{formData.contentGoal || "Not provided"}</dd>
+              </div>
+              {formData.linkedinUrl && (
+                <div className={styles.reviewItem}>
+                  <dt>LinkedIn profile</dt><dd>{formData.linkedinUrl}</dd>
+                </div>
+              )}
+              {formData.voiceReferences && (
+                <div className={styles.reviewItem}>
+                  <dt>Voice references</dt><dd>{formData.voiceReferences}</dd>
+                </div>
+              )}
+              {formData.anythingElse && (
+                <div className={styles.reviewItem}>
+                  <dt>Additional context</dt><dd>{formData.anythingElse}</dd>
+                </div>
+              )}
+            </dl>
 
           {/* Acknowledgement */}
           <div
@@ -434,27 +587,66 @@ export default function RequestForm() {
               {errors.acknowledged}
             </span>
           )}
+          </div>
 
-          {/* Submit */}
-          <p className={styles.submitNote}>
-            Submitting sends your request through FormSubmit. First delivery may require one-time email activation.
-          </p>
+          <div className={styles.draftStatus}>
+            <p className={styles.submitNote} role="status">
+              {!draftReady
+                ? "Restoring saved progress..."
+                : draftSaveFailed
+                  ? "This browser could not save your draft. Keep this page open while completing the form."
+                  : "Your progress saves automatically in this browser and is only sent when you submit."}
+            </p>
+            {hasDraft && (
+              <button
+                type="button"
+                className={styles.clearDraftBtn}
+                onClick={() => {
+                  setFormData(initialData);
+                  setErrors({});
+                  setStep(1);
+                  setSubmitError(null);
+                }}
+              >
+                Clear saved draft
+              </button>
+            )}
+          </div>
+          {step === 3 && (
+            <p className={styles.submitNote}>
+              Submitting sends your request through FormSubmit. First delivery may require one-time email activation.
+            </p>
+          )}
           {submitError && (
             <p className={styles.fieldError} role="alert">
-              {submitError}
+              Your request could not be sent. {draftSaveFailed
+                ? "Your browser could not save the draft, so keep this page open while you try again."
+                : "Your request details are saved in this browser."} Try again, or email{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> directly.
             </p>
           )}
           <div className={styles.submitRow}>
+            {step > 1 && (
+              <button
+                type="button"
+                className={styles.backBtn}
+                onClick={() => setStep(step - 1)}
+              >
+                Back
+              </button>
+            )}
             <button
               type="submit"
               id="submit-request"
               className={styles.submitBtn}
               disabled={submitting}
             >
-              {submitting ? "Sending…" : "Submit request"}
+              {submitting ? "Sending…" : step === 3 ? "Submit request" : step === 2 ? "Review request" : "Continue"}
             </button>
             <p className={styles.reviewNote}>
-              Mara reviews every request personally. Not every source will be a fit.
+              {step === 3
+                ? "Mara reviews every request personally. Not every source will be a fit."
+                : "You can go back and change your answers at any time."}
             </p>
           </div>
         </form>
