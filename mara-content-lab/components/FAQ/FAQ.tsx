@@ -14,7 +14,7 @@ const faqs = [
     id: "faq-2",
     question: "What happens after I request a project?",
     answer:
-      "After a request is reviewed and the source is confirmed as a fit, Mara shares scope confirmation and a Wise payment link for $297 USD. Work begins only after payment and source approval are confirmed. The Wise link is single-use and tied to the agreed scope. Not every source is accepted.",
+      "Mara reviews each request and replies within two business days. If the source is a fit, she confirms the scope and shares payment instructions privately. Work begins after the source, scope, and payment are confirmed. Not every source is accepted.",
   },
   {
     id: "faq-3",

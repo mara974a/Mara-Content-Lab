@@ -27,7 +27,7 @@ export default function TermsPage() {
 
         <section className={styles.section}>
           <h2>2. The Source-to-Authority Sprint</h2>
-          <p>The current public sprint is $297 USD and includes one LinkedIn post of approximately 180–250 words, one six-to-eight-part text outline for a LinkedIn document post, three future content angles with an intended reader and business problem for each, three hook options, and one consolidated revision round. The agreed scope and the public offer description control if details need clarification.</p>
+          <p>The current public sprint is $297 USD and includes one LinkedIn post of approximately 180–250 words, one text-only outline with four to six sections for a LinkedIn document post, three future content angles with an intended reader and business problem for each, three hook options, and one consolidated revision round. The agreed scope and the public offer description control if details need clarification.</p>
           <p>Video editing, video clips, graphic design, Canva files, carousel design, PDF export, publishing or scheduling, X/Twitter threads by default, daily social-media management, full marketing strategy, rewriting an entire transcript, unlimited revisions, free completed custom drafts, guaranteed business outcomes, and calls unless separately agreed are not included. X/Twitter threads may only be discussed separately when they fit the client’s actual publishing strategy.</p>
         </section>
 
@@ -38,7 +38,7 @@ export default function TermsPage() {
 
         <section className={styles.section}>
           <h2>4. Payment</h2>
-          <p>The sprint price is $297 USD. After a request is reviewed and the source is confirmed as a fit, Mara shares scope confirmation and a Wise payment link privately. Payment is due before work begins. Any bank, exchange, or payment-provider fees charged to the client are the client’s responsibility unless applicable law requires otherwise.</p>
+          <p>The sprint price is $297 USD. After a request is reviewed and the source is confirmed as a fit, Mara shares the agreed scope and payment instructions privately. Payment is due before work begins. Any bank, exchange, or payment-provider fees charged to the client are the client’s responsibility unless applicable law requires otherwise.</p>
         </section>
 
         <section className={styles.section}>

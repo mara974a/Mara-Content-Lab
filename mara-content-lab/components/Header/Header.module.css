@@ -49,19 +49,24 @@
 }
 
 .navCta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--clr-accent);
+  color: #fff;
   text-decoration: none;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--clr-accent);
-  border-radius: 0;
+  border-radius: 3px;
+  background-color: var(--clr-accent);
   margin-left: var(--space-3);
   transition: background-color var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .navCta:hover {
-  background-color: var(--clr-accent);
+  background-color: var(--clr-accent-soft);
+  border-color: var(--clr-accent-soft);
   color: #fff;
   text-decoration: none;
 }
@@ -104,20 +109,26 @@
 }
 
 .mobileNavCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   margin-top: var(--space-2);
   font-size: var(--text-base);
   font-weight: 500;
-  color: var(--clr-accent);
+  color: #fff;
   text-decoration: none;
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--clr-accent);
-  border-radius: 0;
+  border-radius: 3px;
+  background-color: var(--clr-accent);
   text-align: center;
   transition: background-color var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .mobileNavCta:hover {
-  background-color: var(--clr-accent);
+  background-color: var(--clr-accent-soft);
+  border-color: var(--clr-accent-soft);
   color: #fff;
   text-decoration: none;
 }

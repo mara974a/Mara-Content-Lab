@@ -2,7 +2,7 @@ import styles from "./Fit.module.css";
 
 const goodFit = [
   "Independent fractional B2B operator or expert consultant",
-  "Has a useful long-form source ready to share",
+  "Has a useful public source ready (podcast, talk, interview, essay, or similar)",
   "Wants careful, source-grounded LinkedIn content",
   "Can review a draft and send consolidated feedback",
   "Values clarity and accuracy over content volume",

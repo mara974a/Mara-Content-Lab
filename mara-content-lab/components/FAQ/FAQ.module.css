@@ -44,7 +44,7 @@
 }
 
 .faqButton:hover {
-  color: var(--clr-accent);
+  color: var(--clr-ink-soft);
 }
 
 .faqIcon {
@@ -56,7 +56,7 @@
 }
 
 .faqButton[aria-expanded="true"] .faqIcon {
-  color: var(--clr-accent);
+  color: var(--clr-ink-muted);
 }
 
 .faqAnswer {

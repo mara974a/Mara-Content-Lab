@@ -13,8 +13,8 @@ const included = [
   {
     title: "2. LinkedIn document-post outline",
     details: [
-      "Six to eight slide-by-slide content ideas",
-      "Based on the same core insight",
+      "A text-only outline with four to six sections",
+      "Built around the same core insight",
       "Text outline only — no Canva file, no design file",
     ],
   },
@@ -38,7 +38,7 @@ const included = [
 ];
 
 const clientProvides = [
-  "One approved podcast, webinar, interview, long-form conversation, or video",
+  "One approved public source: a podcast, talk, interview, essay, or other long-form conversation",
   "A short description of the audience you want to reach",
   "Optional: three to five public LinkedIn posts for voice reference",
 ];
@@ -131,7 +131,7 @@ export default function Offer() {
         </div>
 
         <p className={styles.paymentNote}>
-          After a request is reviewed and the source is confirmed as a fit, Mara shares scope confirmation and a Wise payment link for $297 USD. Work begins only after payment and source approval are confirmed. The Wise link is single-use and tied to the agreed scope.
+          After a request is reviewed and the source is confirmed as a fit, Mara confirms the scope and shares payment instructions privately. Work begins only after the source, scope, and payment are confirmed.
         </p>
       </div>
     </section>

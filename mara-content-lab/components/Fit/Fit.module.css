@@ -65,7 +65,7 @@
 }
 
 .fitMarker--good {
-  color: var(--clr-accent);
+  color: var(--clr-ink-muted);
 }
 
 .fitMarker--not {

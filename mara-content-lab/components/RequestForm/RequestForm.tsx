@@ -7,7 +7,7 @@ import styles from "./RequestForm.module.css";
 const FORM_ACTION = `https://formsubmit.co/${CONTACT_EMAIL}`;
 const DRAFT_STORAGE_KEY = "mara-content-lab-request-draft-v1";
 const SUCCESS_MESSAGE =
-  "Thanks, your request is received. I'll review your source and get back to you within 2 business days. If it's a fit, I'll share scope confirmation and a payment link.";
+  "Thanks, your request is received. I'll review your source and get back to you within 2 business days. If it's a fit, I'll confirm the scope and share payment instructions privately.";
 
 interface FormData {
   fullName: string;
@@ -244,7 +244,7 @@ export default function RequestForm() {
             Request a project
           </h2>
           <p className={styles.formSupportingText}>
-            Fill out the form below with one strong conversation and a little context. I&apos;ll review your request and reply within 2 business days. If it&apos;s a fit, I&apos;ll confirm the scope and share a payment link; otherwise, I&apos;ll let you know.
+            Share one source and some context. This takes three short steps, and your progress saves in this browser until you submit. I&apos;ll review your request and reply within 2 business days; if it&apos;s a fit, I&apos;ll confirm the scope and send payment instructions privately.
           </p>
         </div>
 

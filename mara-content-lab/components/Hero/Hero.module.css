@@ -1,13 +1,15 @@
 .hero {
   padding-block: var(--space-24) var(--space-20);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--clr-accent);
+  border-radius: 3px;
+  font-family: var(--font-sans);
   border-bottom: var(--border-hair);
 }
 
 .heroGrid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--space-20);
-  align-items: center;
 }
 
 .heroEyebrow {
@@ -75,7 +77,7 @@
 }
 
 .heroSecondary:hover {
-  color: var(--clr-accent);
+  color: var(--clr-ink);
 }
 
 /* ── Editorial Visual ───────────────────────────────────────── */
@@ -130,12 +132,12 @@
 .sourceLineHighlight {
   width: 100%;
   height: 10px;
-  background: #b9c3d1;
+  background: var(--clr-warm-gray);
 }
 
 .marginNote {
   margin-top: var(--space-3);
-  color: var(--clr-accent);
+  color: var(--clr-ink-muted);
   font-family: var(--font-serif);
   font-size: var(--text-sm);
   font-style: italic;
@@ -155,7 +157,7 @@
   top: -2px;
   width: 28%;
   height: 5px;
-  background: var(--clr-accent);
+  background: var(--clr-paper-rule);
 }
 
 .docResult {

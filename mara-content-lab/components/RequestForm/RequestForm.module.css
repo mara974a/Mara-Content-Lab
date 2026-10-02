@@ -51,7 +51,7 @@
 .progressTrack span {
   display: block;
   height: 100%;
-  background-color: var(--clr-accent);
+  background-color: var(--clr-ink-muted);
   transition: width var(--duration-fast) ease;
 }
 
@@ -110,8 +110,10 @@
 
 .input,
 .textarea {
+  min-height: 48px;
   font-family: var(--font-sans);
   font-size: var(--text-base);
+  line-height: 1.5;
   color: var(--clr-ink);
   background-color: #fff;
   border: 1px solid var(--clr-warm-gray);
@@ -142,7 +144,7 @@
 
 .textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
   line-height: 1.6;
 }
 
@@ -188,7 +190,7 @@
   height: 18px;
   flex-shrink: 0;
   margin-top: 1px;
-  accent-color: var(--clr-accent);
+  accent-color: var(--clr-ink-soft);
   cursor: pointer;
 }
 
@@ -254,6 +256,7 @@
 }
 
 .submitBtn {
+  min-height: 48px;
   font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: 500;

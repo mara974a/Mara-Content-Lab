@@ -4,30 +4,33 @@ export default function About() {
   return (
     <section id="about" className={styles.about} aria-labelledby="about-heading">
       <div className={`container ${styles.aboutInner}`}>
-        <div>
-          <p className="section-index">
-            07 / ABOUT
-          </p>
+        <div className={styles.aboutIdentity}>
+          <p className="section-index">07 / ABOUT</p>
           <h2 id="about-heading" className={styles.aboutLabel}>
             Parth Tiwari
           </h2>
+          <div
+            className={styles.headshotSlot}
+            role="img"
+            aria-label="Headshot photo slot for Parth Tiwari"
+          >
+            <span aria-hidden="true">PT</span>
+          </div>
         </div>
 
         <div className={styles.aboutBody}>
           <p className={styles.aboutPara}>
-            Hi, I&apos;m Parth Tiwari, the independent builder behind Mara Content Lab.
+            I&apos;m Parth Tiwari, an independent editor based in India and the person behind Mara Content Lab.
           </p>
           <p className={styles.aboutPara}>
-            I&apos;m building a source-grounded editorial workflow for experts whose best thinking already exists in long-form conversations but is not yet easy for the right readers to find and understand.
+            Mara exists to help independent B2B experts turn strong long-form conversations into clear, source-grounded writing their prospective clients can understand.
           </p>
           <p className={styles.aboutPara}>
-            I care about accurate claims, useful angles, clear writing, and content that does not turn real expertise into generic AI summaries.
+            I built the sprint around one useful point, not an automatic summary of everything said.
           </p>
-
-          <div className={styles.aboutSig}>
-            <span className={styles.aboutSigName}>Parth Tiwari</span>
-            <span className={styles.aboutSigRole}>Independent builder, Mara Content Lab</span>
-          </div>
+          <p className={styles.aboutPara}>
+            AI can help with early research and drafting. I remain responsible for checking the source, choosing the angle, and editing the final work.
+          </p>
         </div>
       </div>
     </section>

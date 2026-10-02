@@ -12,7 +12,7 @@
 .backLink {
   display: inline-block;
   margin-bottom: var(--space-12);
-  color: var(--clr-accent);
+  color: var(--clr-ink-soft);
   font-size: var(--text-sm);
   text-underline-offset: 3px;
 }
@@ -72,7 +72,7 @@
 }
 
 .contact {
-  color: var(--clr-accent);
+  color: var(--clr-ink-soft);
   overflow-wrap: anywhere;
 }
 
