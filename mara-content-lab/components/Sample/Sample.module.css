@@ -67,10 +67,17 @@
 }
 
 .analysisBlock p,
+.sampleWhy p,
 .draftBody p {
   color: var(--clr-ink-soft);
   font-size: var(--text-base);
   line-height: 1.7;
+}
+
+.sampleWhy {
+  max-width: 68ch;
+  padding-block: var(--space-6);
+  border-bottom: var(--border-hair);
 }
 
 .sampleDraft {

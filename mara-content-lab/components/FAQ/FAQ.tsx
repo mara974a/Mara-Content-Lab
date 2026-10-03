@@ -52,6 +52,60 @@ const faqs = [
     answer:
       "You may use final approved materials for your own business content. Final usage terms should be confirmed before work begins. Nothing in the sprint grants rights to the original source material or third-party recordings.",
   },
+  {
+    id: "faq-9",
+    question: "What does five business days mean?",
+    answer:
+      "Business days are Monday through Friday; weekends and public holidays are not counted. Delivery is within five business days after the source, scope, and payment are confirmed.",
+  },
+  {
+    id: "faq-10",
+    question: "How is payment handled?",
+    answer:
+      "The sprint is $297 USD and payment is by Wise. Parth shares the payment link privately after reviewing your request, confirming the source is a fit, and agreeing the scope. There is no public payment link.",
+  },
+  {
+    id: "faq-11",
+    question: "What if my source is not a fit?",
+    answer:
+      "Parth reviews requests manually and will let you know if the source is not suitable. If payment has already been made and Mara declines the source before work begins, the terms provide for a full refund. You can also submit another source.",
+  },
+  {
+    id: "faq-12",
+    question: "What counts as one consolidated revision?",
+    answer:
+      "Collect your feedback into one clear response and send it together. That single, consolidated set of changes is the included revision round; additional revisions or a new direction need separate agreement.",
+  },
+  {
+    id: "faq-13",
+    question: "Is $297 USD the price for the full sprint?",
+    answer:
+      "Yes. $297 USD covers the sprint as described on this page. Work beyond the agreed deliverables is not included and would need to be agreed separately before it begins.",
+  },
+  {
+    id: "faq-14",
+    question: "What file formats do you deliver?",
+    answer:
+      "The deliverables are text-first: a LinkedIn post and a text-only document-post outline, plus angles and hooks. A specific file format is not documented here; please confirm your preferred format when Parth reviews the request.",
+  },
+  {
+    id: "faq-15",
+    question: "Can I use the final content commercially?",
+    answer:
+      "After payment is complete, you may use the final approved deliverables for your own professional and business content. This does not transfer rights to the original source or third-party material. See the Terms page for details.",
+  },
+  {
+    id: "faq-16",
+    question: "Do you offer discounts?",
+    answer:
+      "No discounts or alternate rates are listed as a standard offer. If you have a specific question about scope or pricing, email mara974a@gmail.com before submitting a request.",
+  },
+  {
+    id: "faq-17",
+    question: "What is the cancellation and refund policy?",
+    answer:
+      "Before work begins, a cancellation receives a full refund. After work begins but before the first draft is delivered, the refund is 50%; after first-draft delivery, there is no refund. If Mara determines after payment but before work starts that the source is not a fit, you receive a full refund. The Terms page has the full policy.",
+  },
 ];
 
 export default function FAQ() {
@@ -64,8 +118,8 @@ export default function FAQ() {
   return (
     <section id="faq" className={styles.faq} aria-labelledby="faq-heading">
       <div className="container--wide">
-        <p className="eyebrow" style={{ marginBottom: "var(--space-4)" }}>
-          Questions
+        <p className="section-index">
+          08 / QUESTIONS
         </p>
         <h2 id="faq-heading" className={styles.faqHeading}>
           Frequently asked

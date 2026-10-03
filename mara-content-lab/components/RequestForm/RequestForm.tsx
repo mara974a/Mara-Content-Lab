@@ -238,7 +238,7 @@ export default function RequestForm() {
       <div className="container">
         <div className={styles.formHeader}>
           <p className="section-index">
-            08 / REQUEST
+            09 / REQUEST
           </p>
           <h2 id="request-heading" className={styles.formSectionHeading}>
             Request a project

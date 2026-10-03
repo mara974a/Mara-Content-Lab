@@ -1,6 +1,6 @@
 # Mara Content Lab
 
-Editorial site for the Source-to-Authority Sprint. Next.js static export, deployed via GitHub and Cloudflare Pages.
+Editorial site for the Source-to-Authority Sprint. Next.js static export, deployed from GitHub to Cloudflare Workers static assets. Cloudflare Pages is also supported as an alternative.
 
 Requests are reviewed manually. There is no public payment link and no automatic approval.
 
@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Hosting & publishing
 
-The project is configured for static export in `next.config.ts` (`output: "export"`). It has no API routes or server-rendered pages. `npm run build` creates the static site in `out/`; use that directory as the Cloudflare Pages build output.
+The project is configured for static export in `next.config.ts` (`output: "export"`). It has no API routes or server-rendered pages. `npm run build` creates the static site in `out/`, which is published through `wrangler.jsonc`.
 
 ### 1. Push to GitHub
 
@@ -39,7 +39,18 @@ git push -u origin main
 
 If the `origin` remote already exists, update it with `git remote set-url origin https://github.com/<YOUR_GITHUB_USERNAME>/<REPO_NAME>.git` instead of adding it again.
 
-### 2. Deploy with Cloudflare Pages
+### 2. Current production: Cloudflare Workers Builds
+
+The production site is a static-assets Worker at `https://mara-content-lab.mara974a.workers.dev/`, connected to this GitHub repository. A push to `main` starts a Workers Build. The repository layout and Worker configuration are:
+
+- **Root directory:** `mara-content-lab`
+- **Build command:** `npm run build`
+- **Deploy command:** `npx wrangler deploy`
+- **Static assets:** `out/` (configured in `wrangler.jsonc`)
+
+The app does not need deployment secrets or a public payment URL. Check the Workers Builds status in GitHub or the Cloudflare dashboard after pushing.
+
+### 3. Optional alternative: Cloudflare Pages
 
 1. Sign in to the Cloudflare dashboard.
 2. Open **Workers & Pages → Create application → Pages → Connect to Git**.
@@ -51,18 +62,7 @@ If the `origin` remote already exists, update it with `git remote set-url origin
    - **Build command:** `npm run build`.
    - **Build output directory:** `out`.
 5. Save and deploy.
-6. Open the generated `*.pages.dev` URL and check the site. New pushes to the production branch trigger deployments automatically; check the Pages project’s deployments view to confirm each build.
-
-### Cloudflare Workers static assets (if the dashboard opens Workers)
-
-The site can also be deployed as static assets through the newer Workers workflow without adding an API or server logic. The included `wrangler.jsonc` publishes the generated `out/` folder.
-
-1. In the Worker project’s build settings, set **Root directory** to `mara-content-lab` (or `.` if the app folder itself is the Git repository).
-2. Set **Build command** to `npm run build`.
-3. Set **Deploy command** to `npx wrangler deploy`.
-4. Leave environment variables and API tokens blank, then redeploy.
-
-The root directory must contain `package.json` and `wrangler.jsonc`. If Cloudflare reports that it cannot find `package.json`, its root directory is still set incorrectly.
+6. Open the generated `*.pages.dev` URL and check the site. New pushes to the production branch trigger deployments automatically; confirm builds in the Pages project’s deployments view.
 
 ### Optional: custom domain
 
@@ -79,7 +79,7 @@ No environment variables or secrets are required for deployment. The request for
 - [ ] Submit a valid request and confirm the email arrives at `mara974a@gmail.com`. The first FormSubmit submission may require one-time email activation.
 - [ ] Confirm no payment link is visible anywhere on the public site.
 - [ ] Check that the privacy and terms pages show the intended policies.
-- [ ] Push a new commit to the production branch and confirm Cloudflare Pages starts a deployment.
+- [ ] Push a new commit to the production branch and confirm the configured Cloudflare build completes.
 
 ## Manual pre-launch test checklist
 

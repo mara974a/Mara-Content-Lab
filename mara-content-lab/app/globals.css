@@ -90,6 +90,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.site-content {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+#main-content > section {
+  width: min(100%, 1280px);
+  margin-inline: auto;
+  background-color: var(--section-surface, rgb(247 245 240 / 92%));
+  border-inline: 1px solid rgb(228 224 216 / 72%);
+}
+
+.site-content > footer {
+  background-color: rgb(247 245 240 / 96%);
+}
+
+.prism-fallback {
+  display: block;
+}
+
 .skip-link {
   position: fixed;
   z-index: 1000;
@@ -147,7 +168,7 @@ p {
 
 /* ── Focus States ───────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--clr-ink-soft);
+  outline: 2px solid var(--clr-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -234,6 +255,10 @@ p {
   .container--narrow,
   .container--wide {
     padding-inline: var(--space-5);
+  }
+
+  #main-content > section {
+    background-color: var(--section-surface, rgb(247 245 240 / 96%));
   }
 }
 

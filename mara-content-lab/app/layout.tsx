@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import SiteAssistantLoader from "@/components/Assistant/SiteAssistantLoader";
+import Scene3D from "@/components/Scene3D/Scene3D";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -39,7 +41,11 @@ export default function RootLayout({
       </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        {children}
+        <Scene3D />
+        <div className="site-content">
+          {children}
+          <SiteAssistantLoader />
+        </div>
       </body>
     </html>
   );

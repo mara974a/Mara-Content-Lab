@@ -65,6 +65,17 @@ export default function Sample() {
             </section>
           </div>
 
+          <section className={styles.sampleWhy} aria-labelledby="sample-ai-difference">
+            <h3 id="sample-ai-difference" className={styles.sampleLabel}>
+              Why this differs from a generic summary
+            </h3>
+            <p>
+              A recap could retell the rescue. This draft selects one source-supported
+              idea, makes the limit of the analogy explicit, and connects it to
+              decisions an operator can examine in ordinary project work.
+            </p>
+          </section>
+
           <article className={styles.sampleDraft} aria-labelledby="sample-draft-heading">
             <h3 id="sample-draft-heading" className={styles.sampleLabel}>
               The draft
