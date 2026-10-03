@@ -3,113 +3,102 @@
 import { useState } from "react";
 import styles from "./FAQ.module.css";
 
-const faqs = [
+interface FAQItem {
+  id: string;
+  category: "scope" | "pricing" | "editorial" | "policy";
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQItem[] = [
   {
     id: "faq-1",
+    category: "editorial",
     question: "What kinds of sources work best?",
     answer:
-      "Interviews, webinars, podcasts, talks, and other long-form conversations with a clear point of view. The source must be approved by you and contain enough substance for a standalone post. Sources that are primarily promotional or mostly small talk are unlikely to yield a focused, evidence-backed post.",
+      "Podcasts, webinars, recorded talks, client interviews, and other long-form conversations where you express substantive operational thinking. Sources that are mostly promotional fluff or small talk rarely yield high-conviction posts.",
   },
   {
     id: "faq-2",
-    question: "What happens after I request a project?",
+    category: "scope",
+    question: "What happens after I submit a project request?",
     answer:
-      "Mara reviews each request and replies within two business days. If the source is a fit, she confirms the scope and shares payment instructions privately. Work begins after the source, scope, and payment are confirmed. Not every source is accepted.",
+      "Parth reviews your request personally and replies within two business days. If the source is a good fit, he confirms the scope and shares payment instructions privately via Wise. Work begins only after the source, scope, and payment are confirmed.",
   },
   {
     id: "faq-3",
-    question: "Can you guarantee reach, engagement, leads, or sales?",
+    category: "scope",
+    question: "Can you guarantee viral reach, leads, or sales?",
     answer:
-      "No. Mara Content Lab provides carefully prepared content. Distribution, audience response, and business outcomes depend on many factors outside the scope of this service. No guarantees are made about performance.",
+      "No. Mara Content Lab produces rigorous, source-grounded editorial assets. Distribution algorithms, audience response, and commercial conversions depend on external market dynamics. We guarantee intellectual clarity and accuracy, not vanity reach.",
   },
   {
     id: "faq-4",
-    question: "Do you design LinkedIn carousels?",
+    category: "scope",
+    question: "Do you design LinkedIn carousels or Canva files?",
     answer:
-      "No. The sprint includes a slide-by-slide text outline only. Graphic design, Canva files, and visual exports are not included. The outline gives you a clear content structure you can take to a designer or use as a reference.",
+      "No. The sprint includes a structured 4–6 slide text outline and narrative framework. Visual design, Canva files, and PDF graphic exports are not included, keeping the sprint focused purely on high-leverage intellectual capital.",
   },
   {
     id: "faq-5",
-    question: "Do you use AI?",
+    category: "editorial",
+    question: "How is AI used in the process?",
     answer:
-      "AI assists with research, transcript analysis, and early drafting. Final editorial choices, source-accuracy checks, and edits remain human-led. The goal is accurate, well-grounded content — not the fastest possible output.",
+      "AI assists with computational parsing, indexing transcripts, and exploring hook permutations. All editorial judgment, angle selection, factual verification against the recording, and final polish remain 100% human-crafted by Parth.",
   },
   {
     id: "faq-6",
+    category: "policy",
     question: "How do revisions work?",
     answer:
-      "One consolidated revision round is included. You collect all feedback into one clear response so the revision remains focused and efficient. Piecemeal or open-ended revision requests are outside the scope of the sprint.",
+      "One consolidated revision round is included. You compile all feedback into one clear message so edits are addressed coherently and efficiently. Endless open-ended revisions are outside the sprint scope.",
   },
   {
     id: "faq-7",
-    question: "Do you offer ongoing monthly work?",
+    category: "pricing",
+    question: "How is payment handled?",
     answer:
-      "Ongoing support may be discussed after an initial project. It is not currently offered as a public fixed package. The sprint is designed as a standalone, scoped engagement.",
+      "The sprint is fixed at $297 USD and invoiced via Wise. Parth shares the payment details privately after verifying that your source is a fit. There are no public checkout links or hidden recurring retainers.",
   },
   {
     id: "faq-8",
-    question: "Who owns the final content?",
+    category: "pricing",
+    question: "What does five business days mean?",
     answer:
-      "You may use final approved materials for your own business content. Final usage terms should be confirmed before work begins. Nothing in the sprint grants rights to the original source material or third-party recordings.",
+      "Business days run Monday through Friday. Delivery is completed within five business days after source approval, scope confirmation, and payment receipt.",
   },
   {
     id: "faq-9",
-    question: "What does five business days mean?",
+    category: "policy",
+    question: "Who owns the final intellectual property?",
     answer:
-      "Business days are Monday through Friday; weekends and public holidays are not counted. Delivery is within five business days after the source, scope, and payment are confirmed.",
+      "You own full commercial usage rights to all final delivered copy for your professional content. Nothing in the sprint transfers rights to your original recording or third-party assets.",
   },
   {
     id: "faq-10",
-    question: "How is payment handled?",
+    category: "policy",
+    question: "What is your refund policy?",
     answer:
-      "The sprint is $297 USD and payment is by Wise. Parth shares the payment link privately after reviewing your request, confirming the source is a fit, and agreeing the scope. There is no public payment link.",
-  },
-  {
-    id: "faq-11",
-    question: "What if my source is not a fit?",
-    answer:
-      "Parth reviews requests manually and will let you know if the source is not suitable. If payment has already been made and Mara declines the source before work begins, the terms provide for a full refund. You can also submit another source.",
-  },
-  {
-    id: "faq-12",
-    question: "What counts as one consolidated revision?",
-    answer:
-      "Collect your feedback into one clear response and send it together. That single, consolidated set of changes is the included revision round; additional revisions or a new direction need separate agreement.",
-  },
-  {
-    id: "faq-13",
-    question: "Is $297 USD the price for the full sprint?",
-    answer:
-      "Yes. $297 USD covers the sprint as described on this page. Work beyond the agreed deliverables is not included and would need to be agreed separately before it begins.",
-  },
-  {
-    id: "faq-14",
-    question: "What file formats do you deliver?",
-    answer:
-      "The deliverables are text-first: a LinkedIn post and a text-only document-post outline, plus angles and hooks. A specific file format is not documented here; please confirm your preferred format when Parth reviews the request.",
-  },
-  {
-    id: "faq-15",
-    question: "Can I use the final content commercially?",
-    answer:
-      "After payment is complete, you may use the final approved deliverables for your own professional and business content. This does not transfer rights to the original source or third-party material. See the Terms page for details.",
-  },
-  {
-    id: "faq-16",
-    question: "Do you offer discounts?",
-    answer:
-      "No discounts or alternate rates are listed as a standard offer. If you have a specific question about scope or pricing, email mara974a@gmail.com before submitting a request.",
-  },
-  {
-    id: "faq-17",
-    question: "What is the cancellation and refund policy?",
-    answer:
-      "Before work begins, a cancellation receives a full refund. After work begins but before the first draft is delivered, the refund is 50%; after first-draft delivery, there is no refund. If Mara determines after payment but before work starts that the source is not a fit, you receive a full refund. The Terms page has the full policy.",
+      "If Mara declines your source before work begins, you receive a 100% full refund. If you cancel after work begins but before first-draft delivery, the refund is 50%. After draft delivery, all fees are earned.",
   },
 ];
 
+const categories = [
+  { id: "all", label: "All Questions" },
+  { id: "scope", label: "Sprint Scope" },
+  { id: "pricing", label: "Pricing & Wise" },
+  { id: "editorial", label: "Editorial & AI" },
+  { id: "policy", label: "Revisions & Terms" },
+];
+
 export default function FAQ() {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [openId, setOpenId] = useState<string | null>("faq-1");
+
+  const filteredFaqs =
+    selectedCategory === "all"
+      ? faqs
+      : faqs.filter((faq) => faq.category === selectedCategory);
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -117,19 +106,48 @@ export default function FAQ() {
 
   return (
     <section id="faq" className={styles.faq} aria-labelledby="faq-heading">
-      <div className="container--wide">
-        <p className="section-index">
-          08 / QUESTIONS
-        </p>
-        <h2 id="faq-heading" className={styles.faqHeading}>
-          Frequently asked
-        </h2>
+      <div className="container">
+        <div className={styles.faqHeader}>
+          <div className="section-tag">
+            <span className="section-tag-pulse" />
+            <span>08 / Frequently Asked</span>
+          </div>
+          <h2 id="faq-heading" className={styles.faqHeading}>
+            Frequently asked questions.
+          </h2>
+          <p className={styles.faqSubtitle}>
+            Everything you need to know about the sprint scope, timeline, payment,
+            and editorial standards.
+          </p>
+        </div>
 
+        {/* Category Filter Pills */}
+        <div className={styles.filterPills} role="tablist" aria-label="FAQ categories">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              role="tab"
+              aria-selected={selectedCategory === cat.id}
+              className={`${styles.pillBtn} ${
+                selectedCategory === cat.id ? styles.pillBtnActive : ""
+              }`}
+              onClick={() => setSelectedCategory(cat.id)}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Accordion */}
         <dl className={styles.faqList}>
-          {faqs.map((faq) => {
+          {filteredFaqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (
-              <div key={faq.id} className={styles.faqItem}>
+              <div
+                key={faq.id}
+                className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ""}`}
+              >
                 <dt>
                   <button
                     id={`${faq.id}-btn`}
@@ -138,16 +156,19 @@ export default function FAQ() {
                     aria-controls={`${faq.id}-answer`}
                     onClick={() => toggle(faq.id)}
                   >
-                    {faq.question}
+                    <span>{faq.question}</span>
                     <svg
-                      className={styles.faqIcon}
+                      className={`${styles.faqIcon} ${isOpen ? styles.faqIconRotated : ""}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="1.5"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       aria-hidden="true"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                   </button>
                 </dt>

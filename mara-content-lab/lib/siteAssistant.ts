@@ -6,8 +6,14 @@ interface AssistantFaq {
 
 const assistantFaqs: readonly AssistantFaq[] = [
   {
+    question: "What does Mara Content Lab do?",
+    keywords: ["what do you do", "what is mara", "what is this service", "content service", "turn podcast into linkedin"],
+    answer:
+      "Mara turns one approved long-form conversation into a focused LinkedIn authority post, a text-only document outline, three future angles, and three hooks. The work is source-grounded and human-reviewed.",
+  },
+  {
     question: "What is included in the sprint?",
-    keywords: ["included", "deliverables", "what do i get", "sprint includes"],
+    keywords: ["included", "deliverables", "what do i get", "sprint includes", "what will i receive"],
     answer:
       "The sprint includes one 180–250 word LinkedIn authority post, one text-only document-post outline with 4–6 sections, three future content angles, three hook options, and one consolidated revision round. Design, Canva files, publishing, unlimited revisions, and guaranteed outcomes are not included.",
   },
@@ -122,10 +128,10 @@ const assistantFaqs: readonly AssistantFaq[] = [
 ];
 
 export const suggestedAssistantQuestions = [
-  "What is included in the sprint?",
+  "What do you do?",
+  "What is included?",
   "How much does it cost?",
-  "How do I submit a request?",
-  "Do you guarantee results?",
+  "Is my source a fit?",
 ];
 
 function normalize(value: string): string {
@@ -157,6 +163,6 @@ export function answerSiteQuestion(question: string): string {
 
   return (
     bestMatch?.answer ??
-    "I don’t have a documented answer for that. Please email mara974a@gmail.com or submit a request through the form on this page."
+    "I don’t have a reliable answer to that yet. I can help you check whether your source is a fit or build a short project brief, then pass it into the request form. You can also email mara974a@gmail.com."
   );
 }

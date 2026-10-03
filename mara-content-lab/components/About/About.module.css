@@ -1,66 +1,145 @@
 .about {
   padding-block: var(--space-24);
-  border-bottom: var(--border-hair);
+  position: relative;
 }
 
-.aboutInner {
+.aboutCard {
+  background: linear-gradient(135deg, rgba(16, 26, 21, 0.75), rgba(10, 16, 13, 0.85));
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 24px;
+  padding: 3.5rem;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(16, 185, 129, 0.12);
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: var(--space-16);
-  align-items: start;
+  grid-template-columns: 280px 1fr;
+  gap: 3.5rem;
+  align-items: center;
 }
 
-.aboutIdentity {
+.aboutProfile {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
-.aboutLabel {
-  font-family: var(--font-serif);
-  font-size: clamp(var(--text-2xl), 3vw, var(--text-3xl));
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: var(--clr-ink);
+.monogramRing {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));
+  border: 2px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), inset 0 0 20px rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
 
-.headshotSlot {
-  display: grid;
-  place-items: center;
-  width: min(100%, 184px);
-  aspect-ratio: 4 / 5;
-  margin-top: var(--space-6);
-  border: 1px solid var(--clr-paper-rule);
-  background-color: var(--clr-paper-warm);
-  color: var(--clr-ink-muted);
+.monogramLetters {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 40%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.headshotSlot span {
-  font-family: var(--font-serif);
-  font-size: var(--text-3xl);
+.authorName {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.authorRole {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--emerald-bright);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.statusBeacon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--emerald-bright);
+  background: rgba(16, 185, 129, 0.12);
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-bright);
+  box-shadow: 0 0 8px var(--emerald-bright);
+  animation: pulseBeacon 2s infinite;
 }
 
 .aboutBody {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1.25rem;
+}
+
+.leadPara {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.6;
 }
 
 .aboutPara {
-  font-size: var(--text-lg);
-  color: var(--clr-ink-soft);
+  font-size: 1rem;
+  color: var(--text-secondary);
   line-height: 1.7;
-  max-width: 54ch;
 }
 
-@media (max-width: 768px) {
-  .aboutInner {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
+.aboutFooter {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
 
-  .headshotSlot {
-    width: min(38vw, 160px);
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.socialLink:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 860px) {
+  .aboutCard {
+    grid-template-columns: 1fr;
+    padding: 2.25rem;
+    gap: 2rem;
   }
 }

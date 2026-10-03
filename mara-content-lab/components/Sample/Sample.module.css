@@ -1,114 +1,313 @@
 .sample {
   padding-block: var(--space-24);
-  border-bottom: var(--border-hair);
+  position: relative;
 }
 
-.sampleInner {
-  max-width: var(--wide-width);
-  margin-inline: auto;
+.sampleHeader {
+  margin-bottom: 3rem;
 }
 
 .sampleHeading {
-  max-width: 24ch;
-  margin-bottom: var(--space-8);
-  font-size: clamp(var(--text-3xl), 3.5vw, var(--text-4xl));
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.sampleSource {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: var(--space-6);
-  padding-block: var(--space-6);
-  border-block: var(--border-rule);
+.sampleSubtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 64ch;
+  line-height: 1.6;
 }
 
-.sampleLabel {
-  margin-bottom: var(--space-3);
-  color: var(--clr-accent);
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+/* Studio Wrapper */
+.studioContainer {
+  background: rgba(13, 22, 17, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(16, 185, 129, 0.12);
+}
+
+/* Studio Source Bar */
+.sourceBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sourceInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sourceBadge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--emerald-bright);
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
   text-transform: uppercase;
 }
 
 .sourceTitle {
-  margin-bottom: var(--space-2);
-  font-size: var(--text-xl);
-  line-height: 1.35;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .sourceMeta {
-  font-size: var(--text-sm);
-  color: var(--clr-ink-muted);
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
-.sourceLink {
+.sourceExternalLink {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  color: var(--clr-ink);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  text-underline-offset: 4px;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--emerald-bright);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  transition: all 0.2s;
+}
+
+.sourceExternalLink:hover {
+  background: rgba(16, 185, 129, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Studio Tab Nav */
+.studioTabs {
+  display: flex;
+  background: rgba(8, 14, 11, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1.5rem 0;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.studioTabBtn {
+  padding: 0.85rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
   white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.sampleAnalysis {
+.studioTabBtn:hover {
+  color: var(--text-primary);
+}
+
+.studioTabActive {
+  color: var(--emerald-bright);
+  border-bottom-color: var(--emerald-bright);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+/* Studio Content Pane */
+.studioBody {
+  padding: 2.25rem;
+}
+
+/* Tab 1: The Authority Post */
+.postHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.postStats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.statHighlight {
+  color: var(--emerald-bright);
+  font-weight: 700;
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.copyBtn:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #ffffff;
+}
+
+.draftCard {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 2rem;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.draftCard p strong {
+  color: #ffffff;
+}
+
+/* Tab 2: Evidence & Angle */
+.analysisGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-10);
-  padding-block: var(--space-8);
-  border-bottom: var(--border-hair);
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
 
-.analysisBlock p,
-.sampleWhy p,
-.draftBody p {
-  color: var(--clr-ink-soft);
-  font-size: var(--text-base);
+.analysisBlock {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+.analysisLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--emerald-bright);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.analysisBlock p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
-.sampleWhy {
-  max-width: 68ch;
-  padding-block: var(--space-6);
-  border-bottom: var(--border-hair);
-}
-
-.sampleDraft {
-  padding-block: var(--space-8) var(--space-6);
-}
-
-.draftBody {
+/* Tab 3: Slide Outlines */
+.slidesGrid {
   display: grid;
-  gap: var(--space-4);
-  max-width: 68ch;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
-.sampleNote {
-  padding-top: var(--space-4);
-  border-top: var(--border-hair);
-  color: var(--clr-ink-muted);
-  font-size: var(--text-sm);
+.slideCard {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-@media (max-width: 640px) {
-  .sampleSource,
-  .sampleAnalysis {
+.slideNumber {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--cyan-bright);
+}
+
+.slideTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.slideBody {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Tab 4: Hooks */
+.hooksGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hookCard {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hookType {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--amber-bright);
+  text-transform: uppercase;
+}
+
+.hookText {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.disclaimerNote {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .analysisGrid {
     grid-template-columns: 1fr;
   }
-
-  .sampleSource {
-    align-items: start;
-    gap: var(--space-3);
-  }
-
-  .sampleAnalysis {
-    gap: var(--space-6);
+  .sourceBar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

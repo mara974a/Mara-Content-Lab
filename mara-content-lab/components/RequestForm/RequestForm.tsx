@@ -100,6 +100,25 @@ export default function RequestForm() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const applyBrief = (event: Event) => {
+      const detail = (event as CustomEvent<Pick<FormData, "sourceLink" | "targetAudience" | "contentGoal">>).detail;
+      setFormData((current) => ({ ...current, ...detail }));
+      setErrors((current) => ({
+        ...current,
+        sourceLink: undefined,
+        targetAudience: undefined,
+        contentGoal: undefined,
+      }));
+      setStep(2);
+      setSubmitted(false);
+      setSubmitError(null);
+    };
+
+    window.addEventListener("mara:request-brief", applyBrief);
+    return () => window.removeEventListener("mara:request-brief", applyBrief);
+  }, []);
+
   const hasDraft = Object.values(formData).some((value) =>
     typeof value === "string" ? value.trim() !== "" : value
   );
@@ -237,11 +256,12 @@ export default function RequestForm() {
     <section id="request" className={styles.formSection} aria-labelledby="request-heading">
       <div className="container">
         <div className={styles.formHeader}>
-          <p className="section-index">
-            09 / REQUEST
-          </p>
+          <div className="section-tag">
+            <span className="section-tag-pulse" />
+            <span>09 / Brief Builder Terminal</span>
+          </div>
           <h2 id="request-heading" className={styles.formSectionHeading}>
-            Request a project
+            Request your sprint brief.
           </h2>
           <p className={styles.formSupportingText}>
             Share one source and some context. This takes three short steps, and your progress saves in this browser until you submit. I&apos;ll review your request and reply within 2 business days; if it&apos;s a fit, I&apos;ll confirm the scope and send payment instructions privately.

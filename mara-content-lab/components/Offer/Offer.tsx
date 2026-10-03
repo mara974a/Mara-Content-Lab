@@ -1,138 +1,210 @@
-import { OFFER_NAME, OFFER_PRICE, OFFER_DELIVERY } from "@/lib/constants";
+"use client";
+
+import { useState } from "react";
+import { OFFER_NAME, OFFER_PRICE } from "@/lib/constants";
 import styles from "./Offer.module.css";
 
-const included = [
+const includedDeliverables = [
   {
-    title: "1. LinkedIn authority post",
+    num: "01",
+    title: "LinkedIn Authority Post",
     details: [
-      "Approximately 180–250 words",
-      "Built around one evidence-backed idea from the approved source",
-      "Edited for clarity and your public voice",
+      "180–250 words calibrated for executive dwell time",
+      "Anchored to 1 source-verified operational thesis",
+      "Tailored meticulously to your genuine public voice",
+      "Includes precise evidence & quote attribution",
     ],
   },
   {
-    title: "2. LinkedIn document-post outline",
+    num: "02",
+    title: "Document-Post Outline",
     details: [
-      "A text-only outline with four to six sections",
-      "Built around the same core insight",
-      "Text outline only — no Canva file, no design file",
+      "4–6 section slide-by-slide narrative structure",
+      "Ready to hand directly to your designer or self-publish",
+      "Focuses on visual framework & breakdown logic",
+      "Text outline only — no Canva or design files",
     ],
   },
   {
-    title: "3. Three future content angles",
+    num: "03",
+    title: "Three Future Content Angles",
     details: [
-      "Each drawn from a different supported point in the same source",
-      "Each includes the intended reader and business problem addressed",
+      "Each drawn from a distinct supported point in your source",
+      "Defines the exact target buyer persona",
+      "Identifies the specific business bottleneck resolved",
+      "Prepares your pipeline for upcoming weeks",
     ],
   },
   {
-    title: "4. Three hook options",
-    details: ["For the primary LinkedIn post"],
-  },
-  {
-    title: "5. One consolidated revision round",
+    num: "04",
+    title: "Three High-Conviction Hooks",
     details: [
-      "All feedback collected and sent together in one clear response",
+      "Contrarian opening, curiosity framing, problem-first variant",
+      "Engineered to stop the mobile LinkedIn feed scroll",
+      "A/B testable for maximum decision-maker engagement",
     ],
   },
-];
-
-const clientProvides = [
-  "One approved public source: a podcast, talk, interview, essay, or other long-form conversation",
-  "A short description of the audience you want to reach",
-  "Optional: three to five public LinkedIn posts for voice reference",
+  {
+    num: "05",
+    title: "One Consolidated Revision",
+    details: [
+      "Comprehensive feedback loop collected in 1 response",
+      "Refines tone, nuance, and company-specific vocabulary",
+      "Ensures zero endless friction or scope confusion",
+    ],
+  },
 ];
 
 const notIncluded = [
-  "Video editing",
-  "Video clips",
-  "Graphic design",
-  "Canva files",
-  "Carousel design",
-  "PDF export",
-  "Publishing or scheduling",
+  "Video editing or audio clip extraction",
+  "Graphic design, PDF export, Canva templates",
+  "Account publishing, scheduling, or DM outreach",
+  "Daily social media management",
+  "Rewriting an entire raw transcript verbatim",
+  "Guaranteed viral reach or lead quotas",
+  "Calls unless separately scheduled and agreed",
+  "Unlimited open-ended revision cycles",
   "X/Twitter threads by default",
-  "Daily social-media management",
-  "Full marketing strategy",
-  "Rewriting an entire transcript",
-  "Unlimited revisions",
-  "Guaranteed business outcomes",
-  "Free completed custom drafts",
-  "Calls unless separately agreed",
 ];
 
-const offerMetadata = [
-  "One approved source",
-  "Five business days",
-  "One consolidated revision",
-  "Text-first delivery",
+const timeline = [
+  { day: "Day 1–2", desc: "Source deep-dive, evidence extraction & strategic angle mapping" },
+  { day: "Day 3–4", desc: "Drafting authority post, document outline & hook triad" },
+  { day: "Day 5", desc: "Consolidated delivery, client review & final calibration" },
 ];
 
 export default function Offer() {
+  const [activeTab, setActiveTab] = useState<"included" | "excluded">("included");
+
   return (
     <section id="offer" className={styles.offer} aria-labelledby="offer-heading">
-      <div className="container--wide">
-        <p className="section-index">
-          02 / THE SPRINT
-        </p>
+      <div className="container">
         <div className={styles.offerHeader}>
           <div className={styles.offerMeta}>
-            <h2 id="offer-heading" className={styles.offerName}>
+            <div className="section-tag">
+              <span className="section-tag-pulse" />
+              <span>02 / Fixed-Scope Specification</span>
+            </div>
+            <h2 id="offer-heading" className={styles.offerTitle}>
               {OFFER_NAME}
             </h2>
-            <span className={styles.offerPrice}>{OFFER_PRICE}</span>
+            <p className={styles.offerSubtitle}>
+              A 5-business-day editorial engagement that turns 1 approved source
+              into a LinkedIn post, text-only document outline, 3 hooks, and 3 future content angles.
+            </p>
           </div>
-          <p className={styles.offerDelivery}>{OFFER_DELIVERY}.</p>
-          <ul className={styles.offerMetadata} aria-label="Sprint details">
-            {offerMetadata.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <a href="#request" className={styles.offerCta}>
-          Request this sprint
-        </a>
 
-        <div className={styles.offerGrid}>
-          <section className={styles.offerColumn} aria-labelledby="included-heading">
-            <h3 id="included-heading" className={styles.offerColLabel}>Included</h3>
-            {included.map((item, i) => (
-              <div key={i} className={styles.deliverable}>
-                <p className={styles.deliverableTitle}>{item.title}</p>
-                <ul className={styles.deliverableDetail}>
-                  {item.details.map((d, j) => (
-                    <li key={j}>{d}</li>
-                  ))}
-                </ul>
+          <div className={styles.pricePill}>
+            <span className={styles.priceAmount}>{OFFER_PRICE}</span>
+            <span className={styles.priceNote}>5-Day Delivery · Human-Led Rigor</span>
+          </div>
+        </div>
+
+        {/* 5 3D Deliverable Cards */}
+        <div className={styles.deliverablesGrid}>
+          {includedDeliverables.map((item) => (
+            <article key={item.num} className={styles.deliverableCard}>
+              <span className={styles.cardIndex}>{item.num} / Deliverable</span>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <ul className={styles.cardList}>
+                {item.details.map((detail, idx) => (
+                  <li key={idx} className={styles.cardListItem}>
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        {/* Scope Matrix */}
+        <div className={styles.scopeContainer}>
+          <div className={styles.scopeTabs}>
+            <button
+              type="button"
+              className={`${styles.scopeTabBtn} ${
+                activeTab === "included" ? styles.scopeTabActive : ""
+              }`}
+              onClick={() => setActiveTab("included")}
+            >
+              ✓ What You Receive (Guaranteed Scope)
+            </button>
+            <button
+              type="button"
+              className={`${styles.scopeTabBtn} ${
+                activeTab === "excluded" ? styles.scopeTabActive : ""
+              }`}
+              onClick={() => setActiveTab("excluded")}
+            >
+              × Deliberately Excluded (No Fluff)
+            </button>
+          </div>
+
+          {activeTab === "included" ? (
+            <div className={styles.exclusionsGrid}>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>1 Core LinkedIn Authority Post (180–250 words)</span>
+              </div>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>1 Document-Post Slide Framework (4–6 slides)</span>
+              </div>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>3 Future Content Angles with buyer personas</span>
+              </div>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>3 High-Conversion Hook Options</span>
+              </div>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>1 Consolidated Revision Round included</span>
+              </div>
+              <div className={styles.exclusionItem}>
+                <span style={{ color: "var(--emerald-bright)" }}>✓</span>
+                <span>Text-first delivery directly into your inbox</span>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.exclusionsGrid}>
+              {notIncluded.map((item, idx) => (
+                <div key={idx} className={styles.exclusionItem}>
+                  <span className={styles.exclusionIcon}>×</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Client Roadmap & Turnaround Planner */}
+        <div className={styles.clientRoadmap}>
+          <div className={styles.roadmapLeft}>
+            <h3>Ready in 5 Business Days</h3>
+            <p>
+              Work begins the moment your source, scope, and payment are confirmed.
+              Mara reviews your recording directly—extracting signal, discarding conversational
+              filler, and delivering finished assets ready for review.
+            </p>
+            <div style={{ marginTop: "1.5rem" }}>
+              <a href="#request" className="btn-primary">
+                <span>Request This Sprint ($297 USD)</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div className={styles.roadmapTimeline}>
+            {timeline.map((step, idx) => (
+              <div key={idx} className={styles.timelineStep}>
+                <span className={styles.timelineDay}>{step.day}</span>
+                <span className={styles.timelineDesc}>{step.desc}</span>
               </div>
             ))}
-          </section>
-
-          <section className={styles.offerColumn} aria-labelledby="excluded-heading">
-            <h3 id="excluded-heading" className={styles.offerColLabel}>Not included</h3>
-            <ul className={styles.notIncludedList}>
-              {notIncluded.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className={styles.threadNote}>
-              X/Twitter threads are not included by default and may only be discussed separately when they fit the client’s actual publishing strategy.
-            </p>
-          </section>
+          </div>
         </div>
-
-        <div className={styles.clientInputs}>
-          <h3 className={styles.offerColLabel}>What you provide</h3>
-          <ul className={styles.clientInputList}>
-            {clientProvides.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <p className={styles.paymentNote}>
-          After a request is reviewed and the source is confirmed as a fit, Mara confirms the scope and shares payment instructions privately. Work begins only after the source, scope, and payment are confirmed.
-        </p>
       </div>
     </section>
   );

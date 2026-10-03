@@ -4,7 +4,29 @@
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.78;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16, 185, 129, 0.12), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 40%, rgba(6, 182, 212, 0.08), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(16, 185, 129, 0.07), transparent 65%),
+    linear-gradient(180deg, #050807 0%, #070d0a 50%, #050807 100%);
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 65% 25%, rgba(16, 185, 129, 0.14), transparent 45%),
+    radial-gradient(circle at 25% 65%, rgba(6, 182, 212, 0.1), transparent 50%);
+  filter: blur(60px);
+  opacity: 0.8;
+  animation: ambientFloat 14s ease-in-out infinite alternate;
+}
+
+@keyframes ambientFloat {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-2%, 2%); }
+  100% { transform: scale(0.98) translate(1%, -1%); }
 }
 
 .scene :global(canvas),
@@ -16,8 +38,8 @@
   height: 100%;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .scene {
-    opacity: 0.62;
+    opacity: 0.8;
   }
 }

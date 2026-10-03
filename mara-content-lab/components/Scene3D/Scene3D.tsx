@@ -73,25 +73,22 @@ export default function Scene3D() {
       current.x = (event.clientX / window.innerWidth) * 2 - 1;
       current.y = 1 - (event.clientY / window.innerHeight) * 2;
       current.active = true;
-      const angleIndex = Math.min(
-        3,
-        Math.floor((event.clientX / window.innerWidth) * 4),
-      );
-      if (angleIndex !== current.angleIndex) {
-        current.angleIndex = angleIndex;
-        window.dispatchEvent(
-          new CustomEvent<number>("mara:prism-angle", { detail: angleIndex }),
-        );
-      }
     };
+
     const releasePointer = () => {
       interaction.current.active = false;
     };
+
     const updateScroll = () => {
       const maxScroll =
         document.documentElement.scrollHeight - window.innerHeight;
       interaction.current.scroll =
         maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    };
+
+    const handleAngleEvent = (event: Event) => {
+      const customEvent = event as CustomEvent<number>;
+      interaction.current.angleIndex = customEvent.detail;
     };
 
     updateScroll();
@@ -100,6 +97,7 @@ export default function Scene3D() {
     window.addEventListener("pointercancel", releasePointer, { passive: true });
     window.addEventListener("scroll", updateScroll, { passive: true });
     window.addEventListener("resize", updateScroll, { passive: true });
+    window.addEventListener("mara:set-angle", handleAngleEvent);
 
     return () => {
       window.removeEventListener("pointermove", updatePointer);
@@ -107,6 +105,7 @@ export default function Scene3D() {
       window.removeEventListener("pointercancel", releasePointer);
       window.removeEventListener("scroll", updateScroll);
       window.removeEventListener("resize", updateScroll);
+      window.removeEventListener("mara:set-angle", handleAngleEvent);
     };
   }, [sceneEnabled]);
 

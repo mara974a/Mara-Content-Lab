@@ -1,64 +1,188 @@
 .problem {
   padding-block: var(--space-24);
-  border-bottom: var(--border-hair);
+  position: relative;
 }
 
 .problemInner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: var(--space-16);
   align-items: start;
 }
 
 .problemLeft {
   position: sticky;
-  top: calc(64px + var(--space-8));
+  top: calc(80px + var(--space-6));
 }
 
 .problemHeading {
-  font-size: clamp(var(--text-3xl), 3.5vw, var(--text-4xl));
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-6);
-  max-width: 20ch;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .problemIntro {
-  font-size: var(--text-lg);
-  color: var(--clr-ink-soft);
+  font-size: 1.12rem;
+  color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: var(--space-6);
+  margin-bottom: 2rem;
 }
 
+/* Interactive Signal vs Noise Comparison Visualizer */
+.signalComparison {
+  background: rgba(14, 22, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+  margin-top: 2rem;
+}
+
+.comparisonTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 0.55rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.tabBtnActiveNoise {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.tabBtnActiveSignal {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-bright);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.comparisonContent {
+  padding: 1.25rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+.noiseBox {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.signalBox {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--text-primary);
+}
+
+.boxHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* 4 Problem Points */
 .problemPoints {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: 1.25rem;
 }
 
-.problemPoint {
-  padding-left: var(--space-6);
-  border-left: 2px solid var(--clr-paper-rule);
+.problemCard {
+  background: rgba(15, 24, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 1.75rem;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.problemPoint h3 {
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--clr-ink);
-  letter-spacing: 0;
-  margin-bottom: var(--space-2);
+.problemCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #10b981, transparent);
+  opacity: 0.4;
+  transition: opacity 0.3s;
 }
 
-.problemPoint p {
-  font-size: var(--text-sm);
-  color: var(--clr-ink-muted);
+.problemCard:hover {
+  background: rgba(20, 34, 28, 0.75);
+  border-color: rgba(52, 211, 153, 0.35);
+  transform: translateX(6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.problemCard:hover::before {
+  opacity: 1;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.cardNumber {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--emerald-bright);
+  background: rgba(16, 185, 129, 0.12);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.cardHeading {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.cardBody {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
   line-height: 1.65;
-  max-width: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .problemInner {
     grid-template-columns: 1fr;
     gap: var(--space-10);

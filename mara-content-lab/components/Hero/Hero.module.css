@@ -1,160 +1,325 @@
 .hero {
   position: relative;
-  display: grid;
+  min-height: calc(100vh - 80px);
+  display: flex;
   align-items: center;
-  min-height: min(760px, calc(100svh - 64px));
-  padding-block: var(--space-16);
+  padding-block: var(--space-16) var(--space-20);
   overflow: hidden;
-  isolation: isolate;
-  --section-surface: rgb(247 245 240 / 88%);
-  border-bottom: var(--border-hair);
 }
 
 .heroGrid {
-  position: relative;
-  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: var(--space-12);
   width: 100%;
 }
 
 .heroCopy {
-  max-width: 560px;
+  max-width: 660px;
 }
 
-.heroEyebrow {
-  margin-bottom: var(--space-5);
+.headline {
+  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
 }
 
-.heroHeadline {
-  font-size: var(--text-6xl);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: 0;
-  color: var(--clr-ink);
-  margin-bottom: var(--space-6);
-  max-width: 14ch;
+.headlineGradient {
+  background: linear-gradient(135deg, #ffffff 30%, #34d399 75%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
-.heroBody {
-  font-size: var(--text-lg);
-  line-height: 1.65;
-  color: var(--clr-ink-soft);
-  max-width: 48ch;
-  margin-bottom: var(--space-10);
+.subheadline {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2.25rem;
+  max-width: 52ch;
+}
+
+.subheadline strong {
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .heroActions {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 }
 
-.heroCta {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  padding: var(--space-3) var(--space-6);
-  border: 1px solid var(--clr-accent);
-  border-radius: 3px;
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  font-weight: 500;
-  color: #fff;
-  background-color: var(--clr-accent);
-  text-decoration: none;
-  transition: background-color var(--duration-fast) ease;
+/* 3D Interactive Angle Matrix */
+.angleMatrixContainer {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.heroCta:hover {
-  background-color: var(--clr-accent-soft);
-  border-color: var(--clr-accent-soft);
-  color: #fff;
-  text-decoration: none;
-}
-
-.heroSecondary {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: var(--text-sm);
-  color: var(--clr-ink-muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--clr-warm-gray);
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: var(--font-sans);
-  padding: 0;
-  transition: color var(--duration-fast) ease;
-}
-
-.heroSecondary:hover {
-  color: var(--clr-ink);
-}
-
-.angleLegend {
+.angleMatrixHeader {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-5);
-  margin-top: var(--space-8);
-  color: var(--clr-ink-muted);
-  font-size: var(--text-xs);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
 }
 
-.angleLegend li {
-  white-space: nowrap;
-}
-
-.angleReadout {
-  min-height: 4.4rem;
-  max-width: 48ch;
-  margin-top: var(--space-4);
-  padding-left: var(--space-4);
-  border-left: 1px solid var(--clr-paper-rule);
-}
-
-.angleReadoutLabel {
-  margin-bottom: var(--space-1);
-  color: var(--clr-accent);
-  font-size: var(--text-xs);
+.angleMatrixLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--text-muted);
 }
 
-.angleReadoutText {
-  color: var(--clr-ink-muted);
-  font-size: var(--text-sm);
-  line-height: 1.55;
+.angleMatrixHint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--emerald-bright);
 }
 
-@media (max-width: 540px) {
-  .hero {
-    min-height: min(680px, calc(100svh - 56px));
-    padding-block: var(--space-12);
-    align-items: start;
+.angleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.angleCard {
+  background: rgba(18, 28, 23, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.angleCard:hover,
+.angleCardActive {
+  background: rgba(24, 44, 34, 0.75);
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+  transform: translateY(-2px);
+}
+
+.angleCardActive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+}
+
+.angleNumber {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--emerald-bright);
+  margin-bottom: 0.2rem;
+}
+
+.angleTitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.angleDetailBox {
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.angleDetailIcon {
+  color: var(--emerald-bright);
+  flex-shrink: 0;
+}
+
+.angleDetailText {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* 3D Holographic Card on the Right */
+.holographicCard {
+  background: linear-gradient(135deg, rgba(20, 32, 26, 0.7), rgba(12, 20, 16, 0.85));
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 24px;
+  padding: 2.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.15);
+  backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.holographicCard::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.cardTag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--emerald-bright);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cardBatch {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--emerald);
+}
+
+.cardBatchDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-bright);
+  box-shadow: 0 0 8px var(--emerald-bright);
+}
+
+.cardPriceGroup {
+  margin-bottom: 1.5rem;
+}
+
+.cardPriceLabel {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.cardPrice {
+  font-size: 3.25rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.cardCurrency {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--emerald-bright);
+}
+
+/* Audio-to-Signal Waveform Simulation */
+.waveformContainer {
+  margin-block: 1.5rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.waveformHeader {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.waveBars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+}
+
+.waveBar {
+  flex: 1;
+  background: linear-gradient(180deg, #34d399, #059669);
+  border-radius: 3px;
+  opacity: 0.85;
+  animation: wavePulse 1.8s infinite ease-in-out alternate;
+}
+
+@keyframes wavePulse {
+  0% { transform: scaleY(0.2); }
+  50% { transform: scaleY(0.9); }
+  100% { transform: scaleY(0.4); }
+}
+
+.cardPerks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.cardPerk {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.cardPerkIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--emerald-bright);
+  flex-shrink: 0;
+}
+
+.cardCta {
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 
-  .heroCopy {
-    max-width: 34rem;
-  }
-
-  .heroHeadline {
-    font-size: var(--text-4xl);
-  }
-
-  .heroBody {
-    font-size: var(--text-base);
-  }
-
-  .heroActions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .angleLegend {
-    column-gap: var(--space-4);
-    row-gap: var(--space-2);
+  .angleGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
